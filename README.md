@@ -69,7 +69,7 @@ docker build -t flaskapp .
 
 - Now, make sure that you have created a network using following command
 ```bash
-docker network create twotier
+docker network create my-net
 ```
 
 - Attach both the containers in the same network, so that they can communicate with each other
@@ -78,10 +78,11 @@ i) MySQL container
 ```bash
 docker run -d \
     --name mysql \
-    -v mysql-data:/var/lib/mysql \
-    --network=twotier \
-    -e MYSQL_DATABASE=mydb \
-    -e MYSQL_ROOT_PASSWORD=admin \
+    -v two_tier:/var/lib/mysql \
+    --network=my-net \
+    -e MYSQL_DATABASE=twotier_db \
+    -e MYSQL_ROOT_PASSWORD=root \
+    -e MYSQL_PASSWORD=root \
     -p 3306:3306 \
     mysql:5.7
 
@@ -90,11 +91,11 @@ ii) Backend container
 ```bash
 docker run -d \
     --name flaskapp \
-    --network=twotier \
+    --network=my-net \
     -e MYSQL_HOST=mysql \
     -e MYSQL_USER=root \
-    -e MYSQL_PASSWORD=admin \
-    -e MYSQL_DB=mydb \
+    -e MYSQL_PASSWORD=root \
+    -e MYSQL_DB=twotier_db \
     -p 5000:5000 \
     flaskapp:latest
 
