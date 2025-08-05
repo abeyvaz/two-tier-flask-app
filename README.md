@@ -1,5 +1,3 @@
-Here’s your **README** with **beautified formatting**, **syntax-highlighted code blocks**, and structured sections using GitHub markdown best practices:
-
 ---
 
 # 🚀 Flask App with MySQL – Dockerized Setup
