@@ -33,7 +33,7 @@ cd your-repo-name
 ### 1. Start the App
 
 ```bash
-docker-compose up --build
+docker-compose up --build -d
 ```
 
 ### 2. Access the App
@@ -107,6 +107,8 @@ docker run -d \
     -e MYSQL_PASSWORD=root \
     -p 3306:3306 \
     mysql:5.7
+
+docker run -d --name mysql -v two_tier:/var/lib/mysql --network=my-net -e MYSQL_ROOT_PASSWORD=root -e MYSQL_PASSWORD=root -e MYSQL_DATABASE=twotier_db -p 3306:3306  mysql:5.7
 ```
 
 ### 5. Start the Flask App Container
@@ -121,9 +123,17 @@ docker run -d \
     -e MYSQL_DB=twotier_db \
     -p 5000:5000 \
     flaskapp:latest
+
+docker run -d -p 5000:5000 --name flaskapp --network=my-net -e MYSQL_HOST=mysql -e MYSQL_USER=root -e MYSQL_PASSWORD=root -e MYSQL_DB=twotier_db flaskapp:latest
 ```
 
 ---
+🐬 Connect to MySQL Container and Check Table
+🔹 1. Enter MySQL Container
+bash
+Copy
+Edit
+docker exec -it mysql bash
 
 ## 📝 Notes
 
@@ -145,12 +155,5 @@ your-repo-name/
 
 ---
 
-## 📧 Contact
-
-Feel free to open an issue or PR for suggestions and improvements. Happy coding!
-
----
-
-Let me know if you'd like me to generate a `docker-compose.yml` or `Dockerfile` sample too!
 
 
