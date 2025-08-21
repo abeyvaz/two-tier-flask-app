@@ -1,6 +1,6 @@
 
 services:
-mysql:
+  mysql:
     # user: "${UID}:${GID}" 
     image: mysql:5.7
     container_name: mysql
