@@ -1,3 +1,5 @@
+
+services:
 mysql:
     # user: "${UID}:${GID}" 
     image: mysql:5.7
