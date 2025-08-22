@@ -7,7 +7,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: twotier_db
-      MYSQL_USER: root
+      # MYSQL_USER: root
       MYSQL_PASSWORD: root
     volumes:
       - ./two_tier:/var/lib/mysql
